@@ -22,6 +22,12 @@ RUN apt-get update && apt-get install -y \
     libhdf5-dev \
     libpq-dev \
     python3-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgl1 \
+
     && rm -rf /var/lib/apt/lists/*
 
 # Install Jupyter and common data science packages
