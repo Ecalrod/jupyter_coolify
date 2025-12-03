@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y \
     libhdf5-dev \
     libpq-dev \
     python3-dev \
-    # OpenCV dependencies
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
