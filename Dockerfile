@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     liblapack-dev \
     libhdf5-dev \
     libpq-dev \
-    python3-dev \
+    python3.11-dev \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
