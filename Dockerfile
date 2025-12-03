@@ -1,19 +1,14 @@
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /workspace
 
-# Install only necessary system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install system dependencies for compiling packages
+RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
     g++ \
     gfortran \
-    python3.11-dev \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
-    libgomp1 \
     git \
     curl \
     wget \
@@ -26,26 +21,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblapack-dev \
     libhdf5-dev \
     libpq-dev \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python packages
+# Install Jupyter and common data science packages
 RUN pip install --no-cache-dir \
     jupyter \
     jupyterlab \
-    numpy==1.25.4 \
+    numpy \
     pandas \
     matplotlib \
     seaborn \
     scikit-learn \
-    plotly \
-    opencv-python-headless==4.8.1 \
-    mediapipe==0.10.0
+    plotly
 
-# Create non-root user
-RUN useradd -m -u 1000 jupyter && chown -R jupyter:jupyter /workspace
+# Create a non-root user
+RUN useradd -m -u 1000 jupyter && \
+    chown -R jupyter:jupyter /workspace
 
 USER jupyter
 
+# Expose Jupyter port
 EXPOSE 8888
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=", "--NotebookApp.password="]
+# Configure Jupyter to allow connections from any IP
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
