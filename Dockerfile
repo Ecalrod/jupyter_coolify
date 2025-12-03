@@ -22,6 +22,17 @@ RUN apt-get update && apt-get install -y \
     libhdf5-dev \
     libpq-dev \
     python3-dev \
+    # OpenCV dependencies
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    libgstreamer1.0-0 \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Jupyter and common data science packages
